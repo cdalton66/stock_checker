@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      API_KEY: "${API_KEY:-}"
+      MYSQL_HOST: "${MYSQL_HOST:-host.docker.internal}"
+      MYSQL_PORT: "${MYSQL_PORT:-3306}"
+      MYSQL_DB: "${MYSQL_DB:-stocks}"
+      MYSQL_USER: "${MYSQL_USER:-root}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD:-}"
+    ports:
+      - "5001:5000"
+    command: ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
