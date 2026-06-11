@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Tracker</title>
+    <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stock Price Tracker</h1>
+            <p class="subtitle">Current stocks in the database</p>
+        </header>
+
+        <main>
+            <div id="loading" class="loading">
+                <p>Loading stocks...</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;">
+                <p id="error-message"></p>
+            </div>
+
+            <table id="stocks-table" class="stocks-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Stock Symbol</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="stocks-tbody">
+                </tbody>
+            </table>
+
+            <div id="empty" class="empty-state" style="display: none;">
+                <p>No stocks found in the database.</p>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="./src/main.ts"></script>
+</body>
+</html>

@@ -81,6 +81,33 @@ def get_stock_price(symbol):
         }), 500
 
 
+@app.route('/api/stocks', methods=['GET'])
+def get_all_stocks():
+    """
+    API endpoint to get all stocks from the database
+    
+    Returns:
+        JSON response with list of all stocks with their prices
+    """
+    try:
+        with db.SessionLocal() as session:
+            stocks = session.query(db.StockQuote).all()
+            stocks_data = [
+                {
+                    "symbol": stock.symbol,
+                    "price": str(stock.price)
+                }
+                for stock in stocks
+            ]
+            return jsonify({
+                "stocks": stocks_data
+            }), 200
+    except Exception as e:
+        return jsonify({
+            "error": f"Error retrieving stocks: {str(e)}"
+        }), 500
+
+
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint"""
